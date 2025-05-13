@@ -106,7 +106,7 @@
             <h1 class="display-5 fw-bold text-primary">
                 <i class="fas fa-user-md me-2"></i>Directorio de empleados
             </h1>
-            <p class="lead text-muted">Listado de empleados</p>
+            <p class="lead text-muted">Listado de roles</p>
         </header>
         <form action="" style="max-width: 450px;">
             <div class="input-group">
@@ -160,7 +160,7 @@
                                     <a href={% url 'empleados:rol_update' rol.id %} class="btn btn-sm btn-primary me-1">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
-                                    <a  href={% url 'empleados:rol_delete' rol.id %} class="btn btn-sm btn-danger">
+                                    <a href={% url 'empleados:rol_delete' rol.id %} class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash-alt"></i> Eliminar
                                     </a>
                                 </td>
@@ -175,6 +175,7 @@
         <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             {% if roles.has_previous %}
+            <!--  Verifico si la página actual tiene una página anterior -->
             <li class="page-item">
                 <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Primera</a>
             </li>
