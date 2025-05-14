@@ -54,9 +54,9 @@ class Rol(models.Model):
 
     # Aquí va la lógica para calcular el IESS, tot_ing, tot_des y neto
     
-     def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         # Traime el sueldo del empleado:
-         self.sueldo = self.empleado.sueldo
+        self.sueldo = self.empleado.sueldo
         
         # Calcular IESS (9.45% del sueldo)
         self.iess = round(self.sueldo * Decimal('0.0945'), 2)
@@ -73,4 +73,3 @@ class Rol(models.Model):
         #super(Rol, self).save()
         
         super.save(*args, **kwargs)
-
