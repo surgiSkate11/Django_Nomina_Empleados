@@ -1,6 +1,7 @@
+
 from django.forms import ModelForm, TextInput, EmailInput, NumberInput, Select
 from django import forms
-from .models import Empleado, Cargo, Departamento, TipoContrato, Rol, BonificacionExtra
+from .models import Empleado, Cargo, Departamento, TipoContrato, Rol
 
 
 class EmpleadoForm(ModelForm):
