@@ -70,13 +70,3 @@ class RolForm(ModelForm):
             'horas_extra': forms.NumberInput(attrs={'class': 'form-control'}),
             'bono': forms.NumberInput(attrs={'class': 'form-control'}),
         }
-
-class BonificacionForm(ModelForm):
-    class Meta:
-        model = BonificacionExtra
-        fields = ['rol', 'descripcion', 'monto']
-        widgets = {
-            'rol': Select(attrs={'class': 'form-control'}),
-            'descripcion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Descripción', 'required': 'required'}),
-            'monto': forms.NumberInput(attrs={'class': 'form-control'}),
-        }
