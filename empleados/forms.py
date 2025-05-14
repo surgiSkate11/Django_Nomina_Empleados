@@ -1,20 +1,32 @@
 
-from django.forms import ModelForm, TextInput, EmailInput, NumberInput, Select
+from django.forms import ModelForm, TextInput, NumberInput, Select
 from django import forms
 from .models import Empleado, Cargo, Departamento, TipoContrato, Rol
 
 
 class EmpleadoForm(ModelForm):
     def clean_cedula(self):
-            cedula = self.cleaned_data.get('cedula')
+        cedula = self.cleaned_data.get('cedula')
 
-            if not cedula.isdigit():
-                raise forms.ValidationError("La cédula debe contener solo números.")
-            
-            if len(cedula) != 10:
-                raise forms.ValidationError("La cédula debe tener exactamente 10 dígitos.")
+        if not cedula.isdigit():
+            raise forms.ValidationError("La cédula debe contener solo números.")
 
-            return cedula
+        if len(cedula) != 10:
+            raise forms.ValidationError("La cédula debe tener exactamente 10 dígitos.")
+
+        return cedula
+
+        
+    def clean_sueldo(self):
+        sueldo = self.cleaned_data.get('sueldo')
+
+        if sueldo <= 0:
+            raise forms.ValidationError("El sueldo debe ser mayor que cero.")
+
+        if sueldo >= 10**10:  # más de 10 dígitos enteros
+            raise forms.ValidationError("El sueldo ingresado es muy alto.")
+        return sueldo
+
     class Meta:
         model = Empleado
         # fields = ['name',' email','phone','cargo']
@@ -25,11 +37,11 @@ class EmpleadoForm(ModelForm):
 
         widgets = {
             'nombre': TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del empleado', 'required': 'required'}),
-            'cedula': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Cédula', 'required': 'required'}),
+            'cedula': TextInput(attrs={'class': 'form-control', 'placeholder': 'Cédula', 'required': 'required'}),
             'cargo': Select(attrs={'class': 'form-control', 'placeholder': 'Cargo', 'required': 'required'}),
             'direccion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Dirección', 'required': 'required'}),
             'sexo': Select(attrs={'class': 'form-control', 'placeholder': 'Sexo', 'required': 'required'}),
-            'sueldo': TextInput(attrs={'class': 'form-control', 'placeholder': 'Sueldo', 'required': 'required'}),
+            'sueldo': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Sueldo', 'required': 'required'}),
             'departamento': Select(attrs={'class': 'form-control', 'placeholder': 'Departamento', 'required': 'required'}),
             'tipo_contrato': Select(attrs={'class': 'form-control', 'placeholder': 'Tipo de contrato', 'required': 'required'}),
         }
